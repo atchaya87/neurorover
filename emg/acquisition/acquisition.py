@@ -10,11 +10,10 @@ from std_msgs.msg import String
 def validate(packet):
     if not isinstance(packet, dict):
         raise ValueError("batch must be a JSON object")
-    required = ("channels", "sample_rate_hz", "samples", "unit", "signal_type")
+    required = ("channels", "sample_rate_hz", "samples", "unit")
     missing = [name for name in required if name not in packet]
     if missing:
         raise ValueError(f"missing fields: {', '.join(missing)}")
-
     channels = packet["channels"]
     samples = packet.get("samples")
     if not isinstance(channels, list) or not channels:
